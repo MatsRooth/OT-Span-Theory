@@ -1,0 +1,22 @@
+source universal.fst;
+define Align {[} | {]};
+define INPUT [ U(i) U(T) U(i) ] & wff;
+define Phon0(X) X;
+define Phon1(X) Optimize(Phon0(X),Ident(V));
+define Phon2(X) Optimize(Phon1(X),Ident(C));
+define Phon3(X) Optimize(Phon2(X),Ident(G));
+define Phon4(X) Optimize(Phon3(X),Ident(L));
+define Phon5(X) Optimize(Phon4(X),Ident(F));
+define Phon6(X) Optimize(Phon5(X),Ident(S));
+define Phon7(X) Optimize(Phon6(X),Ident1(N));
+define Phon8(X) Optimize(Phon7(X),Mark11(N,S));
+define Phon9(X) Optimize(Phon8(X),Mark11(N,F));
+define Phon10(X) Optimize(Phon9(X),Mark11(N,L));
+define Phon11(X) Optimize(Phon10(X),Mark11(N,G));
+define Phon12(X) OptimizeL(Phon11(X),SpreadR3(N),Align);
+define Phon13(X) Optimize(Phon12(X),Mark11(V,N));
+define Phon(X) Phon13(X);
+define OUTPUT Phon(INPUT);
+load defined spell.fsd;
+regex [OUTPUT .o. spell1].l { } OUTPUT;
+print words
